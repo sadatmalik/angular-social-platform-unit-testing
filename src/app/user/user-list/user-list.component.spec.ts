@@ -30,4 +30,10 @@ describe('UserListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should retrieve users from the UserService on init', () => {
+    fixture.detectChanges(); // this will start the lifecycle hooks
+    expect(userServiceSpy).toHaveBeenCalled();
+  });
+
 });
