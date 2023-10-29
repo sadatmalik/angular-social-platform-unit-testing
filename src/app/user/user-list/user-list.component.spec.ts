@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserListComponent } from './user-list.component';
 import { UserService } from "../user.service";
 import { of } from "rxjs";
+import { By } from "@angular/platform-browser";
 
 describe('UserListComponent', () => {
   let component: UserListComponent;
@@ -33,6 +34,17 @@ describe('UserListComponent', () => {
 
   it('should retrieve users from the UserService on init', () => {
     fixture.detectChanges(); // this will start the lifecycle hooks
+    expect(userServiceSpy).toHaveBeenCalled();
+  });
+
+
+  it('should retrieve users from the UserService when the refresh button is clicked', () => {
+    fixture.detectChanges(); // start the lifecycle
+    userServiceSpy.calls.reset();
+
+    const button = fixture.debugElement.query(By.css('button'));
+    button.triggerEventHandler('click', null); // simulate button click
+
     expect(userServiceSpy).toHaveBeenCalled();
   });
 
